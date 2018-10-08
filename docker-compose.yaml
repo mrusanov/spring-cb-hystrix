@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+        - "15672:15672"
+        - "5672:5672"
+
+  spring-cb-server:
+    image: spring-cb-server:1.0-SNAPSHOT
+    ports:
+        - "8090:8090"
+
+  spring-cb-delay-client:
+    depends_on:
+      - rabbitmq
+    image: spring-cb-delay-client:1.0-SNAPSHOT
+    environment:
+        SPRING_RABBITMQ_HOST: rabbitmq
+    ports:
+        - "8091:8091"
+
+  spring-cb-error-client:
+    depends_on:
+      - rabbitmq
+    image: spring-cb-error-client:1.0-SNAPSHOT
+    environment:
+        SPRING_RABBITMQ_HOST: rabbitmq
+    ports:
+        - "8092:8092"
+
+  spring-cb-turbine:
+    depends_on:
+      - rabbitmq
+    image: spring-cb-turbine:1.0-SNAPSHOT
+    environment:
+        SPRING_RABBITMQ_HOST: rabbitmq
+    ports:
+        - "8989:8989"
+
+  spring-cb-dashboard:
+    image: spring-cb-dashboard:1.0-SNAPSHOT
+    ports:
+        - "9080:9080"
