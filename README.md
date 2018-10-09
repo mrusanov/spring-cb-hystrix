@@ -31,7 +31,7 @@ where:
 
  - **spring-cb-dashboard** - a Hystrix Dashboard application to visualize the metrics from the Hystrix commands, pushed by the two clients into the Turbine stream.
  
-## Installation: 
+## Installation 
 1) Clone each of the 'spring-cb-' projects repositories:
    - [spring-cb-server](https://github.com/mrusanov/spring-cb-server)
    - [spring-cb-delay-client](https://github.com/mrusanov/spring-cb-delay-client)
@@ -41,7 +41,7 @@ where:
  
 2) To build a Docker image for every of the projects, run the `buildDockerImage` Gradle task.
    
-   ### Environment Variables:
+   ### Environment Variables
    As explained, the two clients of the server use the Hystrix implementation of the Circuit Breaker pattern. There are some basic Hystrix parameters, which should be configured appropriately. These basic parameters are exposed as Docker environment variables (for each Docker variable, the corresponding Hystrix property is mentioned in brackets):
    - `HYSTRIX_REQUEST_VOLUME_THRESHOLD` (**hystrix.command.default.circuitBreaker.requestVolumeThreshold**) - this property sets the minimum number of requests in a rolling window that will trip the circuit.
       For example, if the value is 20, then if only 19 requests are received in the rolling window (say a window of 10 seconds) the circuit will not trip open even if all 19 failed.
@@ -57,7 +57,7 @@ where:
    
    - `CLIENT_SERVER_READ_TIMEOUT_MILLIS` - this property sets the timeout when a client reads from the server. Its value is used by the `RestTemplateBuilder.setReadTimeout(readTimeoutInMilliseconds)`.
   
-  ## Running the demo:
+  ## Running the demo
   To run the demo, download the **docker-compose.yaml** file and execute:
   
   `$docker-compose up -d`
@@ -73,7 +73,7 @@ where:
   On the home page of the Hystrix dashboard, the Turbine stream should be specified. In the text input for the Turbine stream, paste this:
    - _http://{docker-machine-ip}:8989/hystrix.stream_
    
-# Sources:
+# Sources
  - [Circuit Breaker pattern](https://microservices.io/patterns/reliability/circuit-breaker.html)
  - [Netflix Hystrix](https://github.com/Netflix/hystrix)
  - [Circuit Breaker Spring Getting Started guide](https://spring.io/guides/gs/circuit-breaker/)
