@@ -14,7 +14,7 @@ To show the Circuit Breaker pattern in action, the [Hystrix](https://github.com/
 <img src="https://github.com/mrusanov/spring-cb-hystrix/blob/master/spring-cb-hystrix-demo.png"/>
 
 where:
- - **spring-cb-server** - a server application which exposes two ednpoints:
+ - **spring-cb-server** - a server application which exposes two endpoints:
    - **GET /server/delay/{delay_in_seconds}** - an endpoint to simulate service latency. The client specifies the delay after which the response will be returned from the server;
    - **GET /server/error/{error_code}** - an endpoint to which the client passes an error code (4xx or 5xx) and the server responses with this code. It is allowed to pass code 200-OK, in order to close the circuit.
  
