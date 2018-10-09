@@ -18,6 +18,7 @@ services:
     image: spring-cb-delay-client:1.0-SNAPSHOT
     environment:
         SPRING_RABBITMQ_HOST: rabbitmq
+        SERVER_URL: 'http://192.168.99.100:8090'
         CLIENT_SERVER_READ_TIMEOUT_MILLIS: 5000
         HYSTRIX_TIMEOUT_ENABLED: 'false'
         #HYSTRIX_TIMEOUT_MILLIS: 1000
@@ -33,6 +34,7 @@ services:
     image: spring-cb-error-client:1.0-SNAPSHOT
     environment:
         SPRING_RABBITMQ_HOST: rabbitmq
+        SERVER_URL: 'http://192.168.99.100:8090'
         CLIENT_SERVER_READ_TIMEOUT_MILLIS: 5000
         HYSTRIX_TIMEOUT_ENABLED: 'false'
         #HYSTRIX_TIMEOUT_MILLIS: 1000
