@@ -55,7 +55,10 @@ where:
    
    Information about all Hystrix parameters is available [here](https://github.com/Netflix/Hystrix/wiki/Configuration).
    
-   - `CLIENT_SERVER_READ_TIMEOUT_MILLIS` - this property sets the timeout when a client reads from the server. Its value is used by the `RestTemplateBuilder.setReadTimeout(readTimeoutInMilliseconds)`.
+   - `SERVER_URL` - this property sets the URL (protocol, ip and port) of the **spring-cb-server** from which the two clients are reading;
+   - `CLIENT_SERVER_READ_TIMEOUT_MILLIS` - this property sets the timeout when a client reads from the server. Its value is used by the `RestTemplateBuilder.setReadTimeout(readTimeoutInMilliseconds)`. <br><br>
+    
+   _**Note**_: All of the Environment variables have their default values, which can be checked in the Dockerfile of each client. For the convenience, all of these variables are set in the docker-compose too.
   
   ## Running the demo
   To run the demo, download the **docker-compose.yaml** file and execute:
