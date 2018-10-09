@@ -63,7 +63,7 @@ where:
   `$docker-compose up -d`
   
   ## Testing
-  If all applications have been started successfully, the server application should be running on port 8090 on the Docker machine, and the endpoints for testing are:
+  If all applications have been started successfully, the server application should be running on port 8090 on the Docker machine, and the client endpoints for testing are:
    - _http://{docker-machine-ip}:8091/invoke-server/delay/{delay_in_seconds}?reliable={true/false}_;
    - _http://{docker-machine-ip}:8092/invoke-server/error/{error_code}?reliable={true/false}_;
    
@@ -73,7 +73,7 @@ where:
   On the home page of the Hystrix dashboard, the Turbine stream should be specified. In the text input for the Turbine stream, paste this:
    - _http://{docker-machine-ip}:8989/hystrix.stream_
    
-#Sources
+# Sources:
  - [Circuit Breaker pattern](https://microservices.io/patterns/reliability/circuit-breaker.html)
  - [Netflix Hystrix](https://github.com/Netflix/hystrix)
  - [Circuit Breaker Spring Getting Started guide](https://spring.io/guides/gs/circuit-breaker/)
