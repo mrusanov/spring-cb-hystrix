@@ -1,6 +1,13 @@
 version: '3'
 
 services:
+  spring-config-server:
+    image: spring-config-server:1.0-SNAPSHOT
+    environment:
+        SPRING_PROFILES_ACTIVE: 'repos-conf'
+    ports:
+        - "7777:7777"
+
   rabbitmq:
     image: rabbitmq:3-management
     ports:
@@ -18,13 +25,14 @@ services:
     image: spring-cb-delay-client:1.0-SNAPSHOT
     environment:
         SPRING_RABBITMQ_HOST: rabbitmq
-        SERVER_URL: 'http://192.168.99.100:8090'
-        CLIENT_SERVER_READ_TIMEOUT_MILLIS: 5000
-        HYSTRIX_TIMEOUT_ENABLED: 'false'
+        CONFIG_SERVER_URL: 'http://192.168.99.100:7777'
+        #SERVER_URL: 'http://192.168.99.100:8090'
+        #CLIENT_SERVER_READ_TIMEOUT_MILLIS: 5000
+        #HYSTRIX_TIMEOUT_ENABLED: 'false'
         #HYSTRIX_TIMEOUT_MILLIS: 1000
-        HYSTRIX_REQUEST_VOLUME_THRESHOLD: 2
-        HYSTRIX_SLEEP_WINDOW_MILLIS: 10000
-        HYSTRIX_ERROR_THRESHOLD_PERCENTAGE: 50
+        #HYSTRIX_REQUEST_VOLUME_THRESHOLD: 2
+        #HYSTRIX_SLEEP_WINDOW_MILLIS: 10000
+        #HYSTRIX_ERROR_THRESHOLD_PERCENTAGE: 50
     ports:
         - "8091:8091"
 
@@ -34,13 +42,14 @@ services:
     image: spring-cb-error-client:1.0-SNAPSHOT
     environment:
         SPRING_RABBITMQ_HOST: rabbitmq
-        SERVER_URL: 'http://192.168.99.100:8090'
-        CLIENT_SERVER_READ_TIMEOUT_MILLIS: 5000
-        HYSTRIX_TIMEOUT_ENABLED: 'false'
+        CONFIG_SERVER_URL: 'http://192.168.99.100:7777'
+        #SERVER_URL: 'http://192.168.99.100:8090'
+        #CLIENT_SERVER_READ_TIMEOUT_MILLIS: 5000
+        #HYSTRIX_TIMEOUT_ENABLED: 'false'
         #HYSTRIX_TIMEOUT_MILLIS: 1000
-        HYSTRIX_REQUEST_VOLUME_THRESHOLD: 10
-        HYSTRIX_SLEEP_WINDOW_MILLIS: 5000
-        HYSTRIX_ERROR_THRESHOLD_PERCENTAGE: 50
+        #HYSTRIX_REQUEST_VOLUME_THRESHOLD: 10
+        #HYSTRIX_SLEEP_WINDOW_MILLIS: 5000
+        #HYSTRIX_ERROR_THRESHOLD_PERCENTAGE: 50
     ports:
         - "8092:8092"
 
