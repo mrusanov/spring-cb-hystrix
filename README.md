@@ -32,12 +32,13 @@ where:
  - **spring-cb-dashboard** - a Hystrix Dashboard application to visualize the metrics from the Hystrix commands, pushed by the two clients into the Turbine stream.
  
 ## Installation 
-1) Clone each of the 'spring-cb-' projects repositories:
+1) Clone each of the projects' repositories:
    - [spring-cb-server](https://github.com/mrusanov/spring-cb-server)
    - [spring-cb-delay-client](https://github.com/mrusanov/spring-cb-delay-client)
    - [spring-cb-error-client](https://github.com/mrusanov/spring-cb-error-client)
    - [spring-cb-turbine](https://github.com/mrusanov/spring-cb-turbine)
    - [spring-cb-dashboard](https://github.com/mrusanov/spring-cb-dashboard)
+   - [spring-config-server](https://github.com/mrusanov/spring-config-server)
  
 2) To build a Docker image for every of the projects, run the `buildDockerImage` Gradle task.
    
@@ -55,10 +56,12 @@ where:
    
    Information about all Hystrix parameters is available [here](https://github.com/Netflix/Hystrix/wiki/Configuration).
    
+   - `CONFIG_SERVER_URL` - this property sets the URL (protocol, ip and port) of the **spring-config-server** from which the two clients are fetching their configurations;   
    - `SERVER_URL` - this property sets the URL (protocol, ip and port) of the **spring-cb-server** from which the two clients are reading;
    - `CLIENT_SERVER_READ_TIMEOUT_MILLIS` - this property sets the timeout when a client reads from the server. Its value is used by the `RestTemplateBuilder.setReadTimeout(readTimeoutInMilliseconds)`. <br><br>
     
-   _**Note**_: All of the Environment variables have their default values, which can be checked in the Dockerfile of each client. For the convenience, all of these variables are set in the docker-compose too.
+   _**Note**_: All of the Environment variables have their default values, which can be checked in the Dockerfile of each client. For the convenience, all of these variables are mentioned in the docker-compose too. Also the two clients can fetch their configurations from the config server. On start-up the values of the parameters will be set with their default values because the config server won't be alive before the two clients. To apply the configurations from the config server, execute: 
+   `$ curl {client-ip}:{client-port}/actuator/refresh -d {} -H "Content-Type: application/json"`
   
   ## Running the demo
   To run the demo, download the **docker-compose.yaml** file and execute:
